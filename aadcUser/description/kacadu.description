@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<adtf:ddl xmlns:adtf="adtf">
+ <header>
+  <language_version>3.00</language_version>
+  <author>KACADU AADC Team</author>
+  <date_creation>05.11.2015</date_creation>
+  <date_change>05.11.2015</date_change>
+  <description>AADC Description File Team KACADU</description>
+ </header>
+ <units />
+ <datatypes>
+  <!--<datatype description="predefined ADTF tUInt32 datatype" name="m_tUInt32" size="32" />
+  <datatype description="predefined ADTF tFloat32 datatype" name="m_tFloat32" size="32" />
+  <datatype description="predefined ADTF tFloat64 datatype" name="m_tFloat64" size="64" />-->
+ </datatypes>
+ <enums />
+ <structs>
+  <struct alignment="1" name="tPositionFloat" version="1">
+   <element alignment="1" arraysize="1" byteorder="LE" bytepos="0" name="ui32ArduinoTimestamp" type="tUInt32" />
+   <element alignment="1" arraysize="1" byteorder="LE" bytepos="4" name="fX" type="tFloat32" />
+   <element alignment="1" arraysize="1" byteorder="LE" bytepos="8" name="fY" type="tFloat32" />
+   <element alignment="1" arraysize="1" byteorder="LE" bytepos="12" name="fYaw" type="tFloat32" />
+  </struct>
+  <struct alignment="1" name="tDrawPositionFloat" version="1">
+   <element alignment="1" arraysize="1" byteorder="LE" bytepos="0" name="fX" type="tFloat32" />
+   <element alignment="1" arraysize="1" byteorder="LE" bytepos="4" name="fY" type="tFloat32" />
+   <element alignment="1" arraysize="1" byteorder="LE" bytepos="8" name="fSeconds" type="tFloat32" />
+   <element alignment="1" arraysize="1" byteorder="LE" bytepos="12" name="ui32Red" type="tUInt8" />
+   <element alignment="1" arraysize="1" byteorder="LE" bytepos="13" name="ui32Green" type="tUInt8" />
+   <element alignment="1" arraysize="1" byteorder="LE" bytepos="14" name="ui32Blue" type="tUInt8" />
+  </struct>
+ </structs>
+ <streams>
+  <stream name="stream_tPositionFloat" type="adtf.core.media_type">
+   <struct bytepos="0" name="tPositionFloat" type="tDriverStruct" />
+  </stream>
+  <stream name="stream_tDrawPositionFloat" type="adtf.core.media_type">
+   <struct bytepos="0" name="tDrawPositionFloat" type="tDriverStruct" />
+  </stream>
+ </streams>
+</adtf:ddl>

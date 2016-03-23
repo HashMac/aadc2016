@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/host.dir/host.cpp.o  -o host  -L/home/aadc/torch/install/lib -rdynamic -lluajit -lluaT -lTH -Wl,-rpath,/home/aadc/torch/install/lib: 

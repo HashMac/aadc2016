@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<adtf:project xmlns:adtf="adtf">
+ <general_settings>
+  <property name="active_configuration" type="String" value="Main_with_Emergency_Break" />
+  <property name="enable_messagebus" type="Bool" value="true" />
+  <property name="synchronizing_type" type="Int" value="1" />
+  <property name="global_log_level" type="Int" value="3" />
+  <property name="media_description_files" type="String" value="./../description/*.description;./../addons/*/description/*.description;./../src/examples/src/description/*.description;../../../description/*.*;/home/aadc/AADC/description/aadc.description;../../../../src/aadcUser/description/*.*" />
+ </general_settings>
+ <configurations>
+  <configuration description="" name="Main">
+   <graph>
+    <subgraph alias="Base_Config" idref="Base_Config" priority="4" />
+    <connection connection_priority="50" dest="Base_Config.Watchdog_Alive_Flag" interface="" source="AADC_Watchdog_Trigger.WatchdogAliveSignal" />
+    <filter alias="AADC_Watchdog_Trigger" idref="adtf.aadc.watchdogTrigger" priority="4">
+     <settings />
+    </filter>
+    <filter alias="AADC_Xtion_Camera" idref="adtf.aadc.aadc_xtionCamera" priority="4">
+     <settings>
+      <property name="Configuration File" type="String" value="../../../../configuration_files/xtionSettings.xml" />
+     </settings>
+    </filter>
+    <filter alias="AADC_Converter_Wheels" idref="adtf.aadc.aadc_converterWheels" priority="4">
+     <settings>
+      <property name="Wheel circumference" type="Float" value="0,352.0" />
+     </settings>
+    </filter>
+    <filter alias="AADC_Converter_IMU" idref="adtf.aadc.aadc_converterIMU" priority="5" />
+    <filter alias="KACADU_Monster_Filter" idref="adtf.aadc.kacadu.monsterfilter" priority="6">
+     <settings>
+      <property name="Car Name" type="String" value="Inka" />
+      <property name="Calibration Folder" type="String" value="/home/aadc/FZI/ic_workspace/packages/oadrive/config/" />
+     </settings>
+    </filter>
+    <filter alias="KACADU_World_Coord_Calculator" idref="adtf.aadc.kacadu.worldcoordcalculator" priority="7">
+     <settings>
+      <property name="Reset Angle at startup" type="Bool" value="true" />
+     </settings>
+    </filter>
+    <filter alias="AADC_Wheel_Speed_Controller" idref="adtf.aadc.aadc_wheelSpeedController" priority="8">
+     <settings>
+      <property name="PID::Ki_value" type="Float" value="2.0" />
+      <property name="PID::Kp_value" type="Float" value="2.0" />
+      <property name="PID::Kd_value" type="Float" value="0,5.0" />
+     </settings>
+    </filter>
+    <filter alias="AADC_Calibration_XML" idref="adtf.aadc.aadc_calibrationXML" priority="9">
+     <settings>
+      <property name="Configuration File For Interpolation" type="String" value="../../../../configuration_files/SpeedController.xml" />
+     </settings>
+    </filter>
+    <connection connection_priority="50" dest="AADC_Converter_Wheels.WheelLeft_Struct" interface="" source="Base_Config.WheelLeft_Struct" />
+    <connection connection_priority="50" dest="AADC_Converter_Wheels.WheelRight_Struct" interface="" source="Base_Config.WheelRight_Struct" />
+    <connection connection_priority="50" dest="AADC_Converter_IMU.InerMeasUnit_Struct" interface="" source="Base_Config.InerMeasUnit_Struct" />
+    <connection connection_priority="50" dest="KACADU_World_Coord_Calculator" interface="" source="AADC_Converter_Wheels.car_speed" />
+    <connection connection_priority="50" dest="KACADU_World_Coord_Calculator" interface="" source="AADC_Converter_IMU.yaw" />
+    <connection connection_priority="50" dest="KACADU_Monster_Filter" interface="" source="KACADU_World_Coord_Calculator.car_pos" />
+    <connection connection_priority="50" dest="KACADU_Monster_Filter.video_input" interface="" source="AADC_Xtion_Camera.Video_RGB" />
+    <connection connection_priority="50" dest="KACADU_Monster_Filter.Jury_Struct" interface="" source="Base_Config.Jury_Struct" />
+    <connection connection_priority="50" dest="KACADU_Monster_Filter.Maneuver_List" interface="" source="Base_Config.Jury_ManeuverList" />
+    <connection connection_priority="50" dest="AADC_Wheel_Speed_Controller.measured_wheelSpeed" interface="" source="AADC_Converter_Wheels.car_speed" />
+    <connection connection_priority="50" dest="Base_Config.SteeringController" interface="" source="KACADU_Monster_Filter.steering_angle" />
+    <connection connection_priority="50" dest="AADC_Calibration_XML.input_value" interface="" source="AADC_Wheel_Speed_Controller.actuator_output" />
+    <connection connection_priority="50" dest="Base_Config.Driver_Struct" interface="" source="KACADU_Monster_Filter.Driver_Struct" />
+    <connection connection_priority="50" dest="KACADU_Monster_Filter.InUltraStruct" interface="" source="Base_Config.Ultrasonic_Struct" />
+    <connection connection_priority="50" dest="Base_Config.headLightEnabled" interface="" source="KACADU_Monster_Filter.headLightEnabled" />
+    <connection connection_priority="50" dest="Base_Config.reverseLightsEnabled" interface="" source="KACADU_Monster_Filter.reverseLightEnabled" />
+    <connection connection_priority="50" dest="Base_Config.brakeLightEnabled" interface="" source="KACADU_Monster_Filter.brakeLightEnabled" />
+    <connection connection_priority="50" dest="Base_Config.turnSignalRightEnabled" interface="" source="KACADU_Monster_Filter.turnSignalRightEnabled" />
+    <connection connection_priority="50" dest="Base_Config.turnSignalLeftEnabled" interface="" source="KACADU_Monster_Filter.turnSignalLeftEnabled" />
+    <connection connection_priority="50" dest="Base_Config.hazzardLightsEnabled" interface="" source="KACADU_Monster_Filter.hazardLightEnabled" />
+    <connection connection_priority="50" dest="KACADU_Monster_Filter.depth_input" interface="" source="AADC_Xtion_Camera.Depth_Image" />
+    <connection connection_priority="50" dest="AADC_Wheel_Speed_Controller.set_WheelSpeed" interface="" source="KACADU_Monster_Filter.speed" />
+    <connection connection_priority="50" dest="Base_Config.SpeedController" interface="" source="AADC_Calibration_XML.output_value" />
+   </graph>
+  </configuration>
+  <configuration description="" name="Main_with_Emergency_Break">
+   <graph>
+    <filter alias="AADC_Watchdog_Trigger" idref="adtf.aadc.watchdogTrigger" priority="1" />
+    <filter alias="AADC_Xtion_Camera" idref="adtf.aadc.aadc_xtionCamera" priority="2">
+     <settings>
+      <property name="Configuration File" type="String" value="../../../../configuration_files/xtionSettings.xml" />
+     </settings>
+    </filter>
+    <filter alias="AADC_Converter_IMU" idref="adtf.aadc.aadc_converterIMU" priority="3" />
+    <filter alias="KACADU_Monster_Filter" idref="adtf.aadc.kacadu.monsterfilter" priority="4">
+     <settings>
+      <property name="Calibration Folder" type="String" value="/home/aadc/FZI/ic_workspace/packages/oadrive/config/" />
+      <property name="Car Name" type="String" value="Inka" />
+     </settings>
+    </filter>
+    <filter alias="KACADU_World_Coord_Calculator" idref="adtf.aadc.kacadu.worldcoordcalculator" priority="5">
+     <settings>
+      <property name="Reset Angle at startup" type="Bool" value="true" />
+     </settings>
+    </filter>
+    <filter alias="AADC_Calibration_XML" idref="adtf.aadc.aadc_calibrationXML" priority="6">
+     <settings>
+      <property name="Configuration File For Interpolation" type="String" value="../../../../configuration_files/SpeedController.xml" />
+     </settings>
+    </filter>
+    <filter alias="KACADU_Emergency_Break" idref="adtf.util.emergencybreak_filter" priority="7" />
+    <subgraph alias="Base_Config" idref="Base_Config" priority="8" />
+    <connection connection_priority="50" dest="Base_Config.Watchdog_Alive_Flag" interface="" source="AADC_Watchdog_Trigger.WatchdogAliveSignal" />
+    <connection connection_priority="50" dest="AADC_Converter_IMU.InerMeasUnit_Struct" interface="" source="Base_Config.InerMeasUnit_Struct" />
+    <connection connection_priority="50" dest="KACADU_World_Coord_Calculator" interface="" source="AADC_Converter_IMU.yaw" />
+    <connection connection_priority="50" dest="KACADU_Monster_Filter" interface="" source="KACADU_World_Coord_Calculator.car_pos" />
+    <connection connection_priority="50" dest="KACADU_Monster_Filter.video_input" interface="" source="AADC_Xtion_Camera.Video_RGB" />
+    <connection connection_priority="50" dest="KACADU_Monster_Filter.Jury_Struct" interface="" source="Base_Config.Jury_Struct" />
+    <connection connection_priority="50" dest="KACADU_Monster_Filter.Maneuver_List" interface="" source="Base_Config.Jury_ManeuverList" />
+    <connection connection_priority="50" dest="Base_Config.SteeringController" interface="" source="KACADU_Monster_Filter.steering_angle" />
+    <connection connection_priority="50" dest="KACADU_Emergency_Break.InUltraStruct" interface="" source="Base_Config.Ultrasonic_Struct" />
+    <connection connection_priority="50" dest="KACADU_Emergency_Break.InSpeedControl" interface="" source="KACADU_Monster_Filter.speed" />
+    <connection connection_priority="50" dest="KACADU_Emergency_Break.InSpeed" interface="" source="AADC_Calibration_XML.output_value" />
+    <connection connection_priority="50" dest="Base_Config.SpeedController" interface="" source="KACADU_Emergency_Break.OutSpeed" />
+    <connection connection_priority="50" dest="Base_Config.Driver_Struct" interface="" source="KACADU_Monster_Filter.Driver_Struct" />
+    <connection connection_priority="50" dest="KACADU_Monster_Filter.InUltraStruct" interface="" source="Base_Config.Ultrasonic_Struct" />
+    <connection connection_priority="50" dest="Base_Config.headLightEnabled" interface="" source="KACADU_Monster_Filter.headLightEnabled" />
+    <connection connection_priority="50" dest="Base_Config.reverseLightsEnabled" interface="" source="KACADU_Monster_Filter.reverseLightEnabled" />
+    <connection connection_priority="50" dest="Base_Config.brakeLightEnabled" interface="" source="KACADU_Monster_Filter.brakeLightEnabled" />
+    <connection connection_priority="50" dest="Base_Config.turnSignalRightEnabled" interface="" source="KACADU_Monster_Filter.turnSignalRightEnabled" />
+    <connection connection_priority="50" dest="Base_Config.turnSignalLeftEnabled" interface="" source="KACADU_Monster_Filter.turnSignalLeftEnabled" />
+    <connection connection_priority="50" dest="Base_Config.hazzardLightsEnabled" interface="" source="KACADU_Monster_Filter.hazardLightEnabled" />
+    <connection connection_priority="50" dest="KACADU_Monster_Filter.depth_input" interface="" source="AADC_Xtion_Camera.Depth_Image" />
+    <filter alias="KACADU_Converter_Wheels" idref="adtf.KACADU.KACADU_converterWheels" priority="9">
+     <settings>
+      <property name="Wheel circumference" type="Float" value="0,335.0" />
+     </settings>
+    </filter>
+    <connection connection_priority="50" dest="KACADU_Converter_Wheels.WheelRight_Struct" interface="" source="Base_Config.WheelRight_Struct" />
+    <connection connection_priority="50" dest="KACADU_Converter_Wheels.WheelLeft_Struct" interface="" source="Base_Config.WheelLeft_Struct" />
+    <connection connection_priority="50" dest="KACADU_World_Coord_Calculator.last_distance" interface="" source="KACADU_Converter_Wheels.distance_lastSample" />
+    <filter alias="KACADU_Wheel_Speed_Controller" idref="adtf.aadc.KACADU_wheelSpeedController" priority="10">
+     <settings>
+      <property name="PID::Kd_value" type="Float" value="0,02.0" />
+      <property name="PID::Ki_value" type="Float" value="2,5.0" />
+      <property name="PID::Kp_value" type="Float" value="3.0" />
+      <property name="Controller Typ" type="Int" value="3" />
+     </settings>
+    </filter>
+    <connection connection_priority="50" dest="KACADU_Wheel_Speed_Controller.set_WheelSpeed" interface="" source="KACADU_Emergency_Break.OutControlSpeed" />
+    <connection connection_priority="50" dest="KACADU_Wheel_Speed_Controller.measured_wheelSpeed" interface="" source="KACADU_Converter_Wheels.car_speed" />
+    <connection connection_priority="50" dest="AADC_Calibration_XML.input_value" interface="" source="KACADU_Wheel_Speed_Controller.actuator_output" />
+   </graph>
+  </configuration>
+  <configuration description="" name="ObstacleTest">
+   <graph>
+    <filter alias="AADC_Watchdog_Trigger" idref="adtf.aadc.watchdogTrigger" priority="1" />
+    <filter alias="AADC_Xtion_Camera" idref="adtf.aadc.aadc_xtionCamera" priority="2">
+     <settings>
+      <property name="Configuration File" type="String" value="../../../../configuration_files/xtionSettings.xml" />
+     </settings>
+    </filter>
+    <filter alias="AADC_Converter_IMU" idref="adtf.aadc.aadc_converterIMU" priority="3" />
+    <filter alias="KACADU_Monster_Filter" idref="adtf.aadc.kacadu.monsterfilter" priority="4">
+     <settings>
+      <property name="Calibration Folder" type="String" value="/home/aadc/FZI/ic_workspace/packages/oadrive/config/" />
+      <property name="Car Name" type="String" value="Inka" />
+      <property name="Output Map on Image Pin" type="Bool" value="true" />
+     </settings>
+    </filter>
+    <filter alias="KACADU_World_Coord_Calculator" idref="adtf.aadc.kacadu.worldcoordcalculator" priority="5">
+     <settings>
+      <property name="Reset Angle at startup" type="Bool" value="true" />
+     </settings>
+    </filter>
+    <filter alias="AADC_Wheel_Speed_Controller" idref="adtf.aadc.aadc_wheelSpeedController" priority="6">
+     <settings>
+      <property name="PID::Kd_value" type="Float" value="0,5.0" />
+      <property name="PID::Ki_value" type="Float" value="2.0" />
+      <property name="PID::Kp_value" type="Float" value="2.0" />
+     </settings>
+    </filter>
+    <filter alias="AADC_Calibration_XML" idref="adtf.aadc.aadc_calibrationXML" priority="7">
+     <settings>
+      <property name="Configuration File For Interpolation" type="String" value="../../../../configuration_files/SpeedController.xml" />
+     </settings>
+    </filter>
+    <filter alias="KACADU_Emergency_Break" idref="adtf.util.emergencybreak_filter" priority="8" />
+    <filter alias="KACADU_Converter_Wheels" idref="adtf.KACADU.KACADU_converterWheels" priority="9">
+     <settings>
+      <property name="Wheel circumference" type="Float" value="0,335.0" />
+     </settings>
+    </filter>
+    <filter alias="AADC_Converter_Wheels" idref="adtf.aadc.aadc_converterWheels" priority="10" />
+    <subgraph alias="Base_Config" idref="Base_Config" priority="11" />
+    <connection connection_priority="50" dest="Base_Config.Watchdog_Alive_Flag" interface="" source="AADC_Watchdog_Trigger.WatchdogAliveSignal" />
+    <connection connection_priority="50" dest="AADC_Converter_IMU.InerMeasUnit_Struct" interface="" source="Base_Config.InerMeasUnit_Struct" />
+    <connection connection_priority="50" dest="KACADU_World_Coord_Calculator" interface="" source="AADC_Converter_IMU.yaw" />
+    <connection connection_priority="50" dest="KACADU_Monster_Filter" interface="" source="KACADU_World_Coord_Calculator.car_pos" />
+    <connection connection_priority="50" dest="KACADU_Monster_Filter.video_input" interface="" source="AADC_Xtion_Camera.Video_RGB" />
+    <connection connection_priority="50" dest="KACADU_Monster_Filter.Jury_Struct" interface="" source="Base_Config.Jury_Struct" />
+    <connection connection_priority="50" dest="KACADU_Monster_Filter.Maneuver_List" interface="" source="Base_Config.Jury_ManeuverList" />
+    <connection connection_priority="50" dest="Base_Config.SteeringController" interface="" source="KACADU_Monster_Filter.steering_angle" />
+    <connection connection_priority="50" dest="AADC_Calibration_XML.input_value" interface="" source="AADC_Wheel_Speed_Controller.actuator_output" />
+    <connection connection_priority="50" dest="KACADU_Emergency_Break.InUltraStruct" interface="" source="Base_Config.Ultrasonic_Struct" />
+    <connection connection_priority="50" dest="KACADU_Emergency_Break.InSpeedControl" interface="" source="KACADU_Monster_Filter.speed" />
+    <connection connection_priority="50" dest="AADC_Wheel_Speed_Controller.set_WheelSpeed" interface="" source="KACADU_Emergency_Break.OutControlSpeed" />
+    <connection connection_priority="50" dest="KACADU_Emergency_Break.InSpeed" interface="" source="AADC_Calibration_XML.output_value" />
+    <connection connection_priority="50" dest="Base_Config.SpeedController" interface="" source="KACADU_Emergency_Break.OutSpeed" />
+    <connection connection_priority="50" dest="Base_Config.Driver_Struct" interface="" source="KACADU_Monster_Filter.Driver_Struct" />
+    <connection connection_priority="50" dest="KACADU_Monster_Filter.InUltraStruct" interface="" source="Base_Config.Ultrasonic_Struct" />
+    <connection connection_priority="50" dest="Base_Config.headLightEnabled" interface="" source="KACADU_Monster_Filter.headLightEnabled" />
+    <connection connection_priority="50" dest="Base_Config.reverseLightsEnabled" interface="" source="KACADU_Monster_Filter.reverseLightEnabled" />
+    <connection connection_priority="50" dest="Base_Config.brakeLightEnabled" interface="" source="KACADU_Monster_Filter.brakeLightEnabled" />
+    <connection connection_priority="50" dest="Base_Config.turnSignalRightEnabled" interface="" source="KACADU_Monster_Filter.turnSignalRightEnabled" />
+    <connection connection_priority="50" dest="Base_Config.turnSignalLeftEnabled" interface="" source="KACADU_Monster_Filter.turnSignalLeftEnabled" />
+    <connection connection_priority="50" dest="Base_Config.hazzardLightsEnabled" interface="" source="KACADU_Monster_Filter.hazardLightEnabled" />
+    <connection connection_priority="50" dest="KACADU_Monster_Filter.depth_input" interface="" source="AADC_Xtion_Camera.Depth_Image" />
+    <connection connection_priority="50" dest="KACADU_Converter_Wheels.WheelRight_Struct" interface="" source="Base_Config.WheelRight_Struct" />
+    <connection connection_priority="50" dest="KACADU_Converter_Wheels.WheelLeft_Struct" interface="" source="Base_Config.WheelLeft_Struct" />
+    <connection connection_priority="50" dest="KACADU_World_Coord_Calculator.last_distance" interface="" source="KACADU_Converter_Wheels.distance_lastSample" />
+    <connection connection_priority="50" dest="AADC_Converter_Wheels.WheelRight_Struct" interface="" source="Base_Config.WheelRight_Struct" />
+    <connection connection_priority="50" dest="AADC_Converter_Wheels.WheelLeft_Struct" interface="" source="Base_Config.WheelLeft_Struct" />
+    <connection connection_priority="50" dest="AADC_Wheel_Speed_Controller.measured_wheelSpeed" interface="" source="AADC_Converter_Wheels.car_speed" />
+    <filter alias="Video_Display" idref="adtf.visual.video_display" priority="12">
+     <settings>
+      <property name="active" type="Bool" value="true" />
+     </settings>
+    </filter>
+    <connection connection_priority="50" dest="Video_Display.input" interface="" source="KACADU_Monster_Filter.video_output" />
+   </graph>
+  </configuration>
+ </configurations>
+ <fileinfo adtfversion="2.13.1" configversion="1.3" />
+ <configuration_settings />
+ <adtf_include source="/home/aadc/AADC/config/BaseConfig/IncludeConfig.xml" />
+ <plugins>
+  <plugin optional="true" url="/home/aadc/AADC/bin/Linux/gcc/$(BUILD_TYPE_2)/*.plb" />
+  <plugin optional="true" url="/home/aadc/AADC/bin/Windows/vc10/$(BUILD_TYPE_2)/*.plb" />
+ </plugins>
+</adtf:project>

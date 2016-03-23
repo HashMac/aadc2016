@@ -1,0 +1,3 @@
+ g++ host.cpp -o host -I/mnt/files/Documents/hobbies/info/tools/torch/install/include/ -L/mnt/files/Documents/hobbies/info/tools/torch/install/lib/ -L/home/david/Documents/hobbies/info/tools/torch/install/lib/lua/5.1/ -lluajit -lluaT  -lTH  -lnn  -ltorch -lnnx -limage  -ggdb `pkg-config --cflags opencv` `pkg-config --libs opencv`--std=gnu++11
+
+ g++ host.cpp -o host -I/home/aadc/torch/install/include/ -L/home/aadc/torch/install/lib/ -L/home/aadc/torch/install/lib/lua/5.1/ -lluajit -lluaT  -lTH  -lnn  -ltorch -lnnx -limage  -ggdb `pkg-config --cflags opencv` `pkg-config --libs opencv`--std=gnu++11

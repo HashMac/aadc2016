@@ -1,0 +1,15 @@
+<adtf:export xmlns:adtf="adtf">
+ <folder name="ObstacleTest">
+  <folder name="components">
+   <folder name="FilterTraceView" />
+  </folder>
+  <folder name="windows">
+   <folder Height="855" Visible="true" Width="1153" name="Video_Display" />
+  </folder>
+ </folder>
+ <folder name="Main_with_Emergency_Break">
+  <folder name="components">
+   <folder name="FilterTraceView" />
+  </folder>
+ </folder>
+</adtf:export>

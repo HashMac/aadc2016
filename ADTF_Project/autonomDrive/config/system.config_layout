@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<adtf:configuration xmlns:adtf="adtf">
+ <ce_layouts>
+  <configuration horizontal_scrollbar_value="1" name="Main" show="true" tab_pos="0" vertical_scrollbar_value="1" zoomfactor="0,578703">
+   <component height="506" name="Base_Config" width="345" x="357" y="231" />
+   <component height="74" name="AADC_Calibration_XML" width="172" x="2708" y="391">
+    <input_pin name="input_value" />
+    <output_pin name="output_value" />
+   </component>
+   <component height="98" name="AADC_Wheel_Speed_Controller" width="257" x="2307" y="382">
+    <input_pin name="measured_wheelSpeed" />
+    <input_pin name="set_WheelSpeed" />
+    <output_pin name="actuator_output" />
+   </component>
+   <component height="122" name="KACADU_World_Coord_Calculator" width="217" x="1385" y="382">
+    <input_pin name="last_distance" />
+    <input_pin name="yaw" />
+    <input_pin name="car_speed" />
+    <output_pin name="car_pos" />
+   </component>
+   <component height="338" name="KACADU_Monster_Filter" width="250" x="1800" y="159">
+    <input_pin name="car_pos" />
+    <input_pin name="video_input" />
+    <input_pin name="Jury_Struct" />
+    <input_pin name="Maneuver_List" />
+    <input_pin name="InUltraStruct" />
+    <input_pin name="depth_input" />
+    <output_pin name="video_output" />
+    <output_pin name="depth_output" />
+    <output_pin name="steering_angle" />
+    <output_pin name="speed" />
+    <output_pin name="debug_trajectory_point" />
+    <output_pin name="Driver_Struct" />
+    <output_pin name="headLightEnabled" />
+    <output_pin name="reverseLightEnabled" />
+    <output_pin name="brakeLightEnabled" />
+    <output_pin name="turnSignalRightEnabled" />
+    <output_pin name="turnSignalLeftEnabled" />
+    <output_pin name="hazardLightEnabled" />
+   </component>
+   <component height="194" name="AADC_Converter_IMU" width="174" x="1297" y="515">
+    <input_pin name="InerMeasUnit_Struct" />
+    <output_pin name="yaw" />
+    <output_pin name="pitch" />
+    <output_pin name="roll" />
+    <output_pin name="accX" />
+    <output_pin name="accY" />
+    <output_pin name="accZ" />
+   </component>
+   <component height="122" name="AADC_Converter_Wheels" width="256" x="962" y="559">
+    <input_pin name="WheelLeft_Struct" />
+    <input_pin name="WheelRight_Struct" />
+    <output_pin name="car_speed" />
+    <output_pin name="distance_lastSample" />
+    <output_pin name="distance_overall" />
+   </component>
+   <component height="98" name="AADC_Xtion_Camera" width="172" x="957" y="170">
+    <output_pin name="Video_RGB" />
+    <output_pin name="Depth_Image" />
+   </component>
+   <component height="74" name="AADC_Watchdog_Trigger" width="172" x="50" y="100">
+    <output_pin name="WatchdogAliveSignal" />
+   </component>
+   <connection dest="Base_Config" dest_pin="SpeedController" reldiff="0" shape_type="2" source="AADC_Calibration_XML" source_pin="output_value" x_p2="2892" x_p3="2892" x_p4="341" x_p5="341" y_p2="433" y_p3="373" y_p4="373" y_p5="314" />
+   <connection dest="AADC_Wheel_Speed_Controller" dest_pin="set_WheelSpeed" reldiff="0" shape_type="3" source="KACADU_Monster_Filter" source_pin="speed" x_p2="2074" x_p3="2074" x_p4="2291" x_p5="2291" y_p2="0" y_p3="448" y_p4="448" y_p5="0" />
+   <connection dest="KACADU_Monster_Filter" dest_pin="depth_input" reldiff="0" shape_type="3" source="AADC_Xtion_Camera" source_pin="Depth_Image" x_p2="1145" x_p3="1145" x_p4="1768" x_p5="1768" y_p2="0" y_p3="441" y_p4="441" y_p5="0" />
+   <connection dest="Base_Config" dest_pin="hazzardLightsEnabled" reldiff="0" shape_type="1" source="KACADU_Monster_Filter" source_pin="hazardLightEnabled" x_p2="2184" x_p3="2184" x_p4="309" x_p5="309" y_p2="465" y_p3="487" y_p4="487" y_p5="642" />
+   <connection dest="Base_Config" dest_pin="turnSignalLeftEnabled" reldiff="0" shape_type="1" source="KACADU_Monster_Filter" source_pin="turnSignalLeftEnabled" x_p2="2180" x_p3="2180" x_p4="317" x_p5="317" y_p2="441" y_p3="434" y_p4="434" y_p5="560" />
+   <connection dest="Base_Config" dest_pin="turnSignalRightEnabled" reldiff="0" shape_type="1" source="KACADU_Monster_Filter" source_pin="turnSignalRightEnabled" x_p2="2176" x_p3="2176" x_p4="325" x_p5="325" y_p2="417" y_p3="381" y_p4="381" y_p5="478" />
+   <connection dest="Base_Config" dest_pin="brakeLightEnabled" reldiff="0" shape_type="2" source="KACADU_Monster_Filter" source_pin="brakeLightEnabled" x_p2="2172" x_p3="2172" x_p4="345" x_p5="345" y_p2="393" y_p3="267" y_p4="267" y_p5="273" />
+   <connection dest="Base_Config" dest_pin="reverseLightsEnabled" reldiff="0" shape_type="1" source="KACADU_Monster_Filter" source_pin="reverseLightEnabled" x_p2="2168" x_p3="2168" x_p4="321" x_p5="321" y_p2="369" y_p3="342" y_p4="342" y_p5="519" />
+   <connection dest="Base_Config" dest_pin="headLightEnabled" reldiff="0" shape_type="1" source="KACADU_Monster_Filter" source_pin="headLightEnabled" x_p2="2164" x_p3="2164" x_p4="337" x_p5="337" y_p2="345" y_p3="202" y_p4="202" y_p5="355" />
+   <connection dest="KACADU_Monster_Filter" dest_pin="InUltraStruct" reldiff="0" shape_type="4" source="Base_Config" source_pin="Ultrasonic_Struct" x_p2="782" x_p3="782" x_p4="1752" x_p5="1752" y_p2="0" y_p3="393" y_p4="393" y_p5="0" />
+   <connection dest="Base_Config" dest_pin="Driver_Struct" reldiff="0" shape_type="1" source="KACADU_Monster_Filter" source_pin="Driver_Struct" x_p2="2248" x_p3="2248" x_p4="313" x_p5="313" y_p2="321" y_p3="361" y_p4="361" y_p5="601" />
+   <connection dest="AADC_Calibration_XML" dest_pin="input_value" reldiff="0" shape_type="3" source="AADC_Wheel_Speed_Controller" source_pin="actuator_output" x_p2="2576" x_p3="2576" x_p4="2696" x_p5="2696" y_p2="0" y_p3="433" y_p4="433" y_p5="0" />
+   <connection dest="Base_Config" dest_pin="SteeringController" reldiff="0" shape_type="1" source="KACADU_Monster_Filter" source_pin="steering_angle" x_p2="2258" x_p3="2258" x_p4="333" x_p5="333" y_p2="249" y_p3="255" y_p4="255" y_p5="396" />
+   <connection dest="AADC_Wheel_Speed_Controller" dest_pin="measured_wheelSpeed" reldiff="0" shape_type="4" source="AADC_Converter_Wheels" source_pin="car_speed" x_p2="1252" x_p3="1252" x_p4="2295" x_p5="2295" y_p2="0" y_p3="424" y_p4="424" y_p5="0" />
+   <connection dest="KACADU_Monster_Filter" dest_pin="Maneuver_List" reldiff="0" shape_type="4" source="Base_Config" source_pin="Jury_ManeuverList" x_p2="786" x_p3="786" x_p4="1747" x_p5="1747" y_p2="0" y_p3="345" y_p4="345" y_p5="0" />
+   <connection dest="KACADU_Monster_Filter" dest_pin="Jury_Struct" reldiff="0" shape_type="3" source="Base_Config" source_pin="Jury_Struct" x_p2="714" x_p3="714" x_p4="1751" x_p5="1751" y_p2="0" y_p3="297" y_p4="297" y_p5="0" />
+   <connection dest="KACADU_Monster_Filter" dest_pin="video_input" reldiff="0" shape_type="3" source="AADC_Xtion_Camera" source_pin="Video_RGB" x_p2="1141" x_p3="1141" x_p4="1562" x_p5="1562" y_p2="0" y_p3="249" y_p4="249" y_p5="0" />
+   <connection dest="KACADU_Monster_Filter" dest_pin="car_pos" reldiff="0" shape_type="4" source="KACADU_World_Coord_Calculator" source_pin="car_pos" x_p2="1614" x_p3="1614" x_p4="1759" x_p5="1759" y_p2="0" y_p3="201" y_p4="201" y_p5="0" />
+   <connection dest="KACADU_World_Coord_Calculator" dest_pin="yaw" reldiff="0" shape_type="2" source="AADC_Converter_IMU" source_pin="yaw" x_p2="1483" x_p3="1483" x_p4="1369" x_p5="1369" y_p2="557" y_p3="440" y_p4="440" y_p5="448" />
+   <connection dest="KACADU_World_Coord_Calculator" dest_pin="car_speed" reldiff="0" shape_type="4" source="AADC_Converter_Wheels" source_pin="car_speed" x_p2="1252" x_p3="1252" x_p4="1365" x_p5="1365" y_p2="0" y_p3="472" y_p4="472" y_p5="0" />
+   <connection dest="AADC_Converter_IMU" dest_pin="InerMeasUnit_Struct" reldiff="0" shape_type="4" source="Base_Config" source_pin="InerMeasUnit_Struct" x_p2="766" x_p3="766" x_p4="962" x_p5="962" y_p2="0" y_p3="557" y_p4="557" y_p5="0" />
+   <connection dest="AADC_Converter_Wheels" dest_pin="WheelRight_Struct" reldiff="0" shape_type="3" source="Base_Config" source_pin="WheelRight_Struct" x_p2="774" x_p3="774" x_p4="946" x_p5="946" y_p2="0" y_p3="637" y_p4="637" y_p5="0" />
+   <connection dest="AADC_Converter_Wheels" dest_pin="WheelLeft_Struct" reldiff="0" shape_type="4" source="Base_Config" source_pin="WheelLeft_Struct" x_p2="770" x_p3="770" x_p4="800" x_p5="800" y_p2="0" y_p3="601" y_p4="601" y_p5="0" />
+   <connection dest="Base_Config" dest_pin="Watchdog_Alive_Flag" reldiff="0" shape_type="3" source="AADC_Watchdog_Trigger" source_pin="WatchdogAliveSignal" x_p2="234" x_p3="234" x_p4="328" x_p5="328" y_p2="0" y_p3="437" y_p4="437" y_p5="0" />
+  </configuration>
+  <configuration horizontal_scrollbar_value="25" name="Jury_Config" show="true" tab_pos="2" vertical_scrollbar_value="121" zoomfactor="1,000000">
+   <component height="46" name="Jury_ManeuverList_raw" width="294" x="80" y="176" />
+   <component height="46" name="Jury_ManeuverList_Loopback_raw" width="358" x="80" y="176" />
+   <component height="46" name="Emergency_Stop_Loopback_raw" width="392" x="80" y="176" />
+   <component height="46" name="Jury_Struct_Loopback_raw" width="298" x="80" y="176" />
+   <component height="46" name="Jury_Struct_raw" width="234" x="80" y="176" />
+   <component height="46" name="Emergency_Stop_raw" width="328" x="80" y="176" />
+   <component height="46" name="Driver_Struct_raw" width="258" x="50" y="100" />
+  </configuration>
+  <configuration horizontal_scrollbar_value="1113" name="Main_with_Emergency_Break" show="true" tab_pos="2" vertical_scrollbar_value="1" zoomfactor="0,833331">
+   <component height="506" name="Base_Config" width="345" x="357" y="231" />
+   <component height="98" name="KACADU_Wheel_Speed_Controller" width="257" x="2494" y="369">
+    <input_pin name="set_WheelSpeed" />
+    <input_pin name="measured_wheelSpeed" />
+    <output_pin name="actuator_output" />
+   </component>
+   <component height="98" name="KACADU_Converter_Wheels" width="256" x="942" y="747">
+    <input_pin name="WheelRight_Struct" />
+    <input_pin name="WheelLeft_Struct" />
+    <output_pin name="car_speed" />
+    <output_pin name="distance_lastSample" />
+   </component>
+   <component height="122" name="KACADU_Emergency_Break" width="216" x="2239" y="722">
+    <input_pin name="InUltraStruct" />
+    <input_pin name="InSpeedControl" />
+    <input_pin name="InSpeed" />
+    <output_pin name="OutControlSpeed" />
+    <output_pin name="OutSpeed" />
+   </component>
+   <component height="74" name="AADC_Calibration_XML" width="172" x="2853" y="741">
+    <input_pin name="input_value" />
+    <output_pin name="output_value" />
+   </component>
+   <component height="98" name="KACADU_World_Coord_Calculator" width="217" x="1724" y="748">
+    <input_pin name="yaw" />
+    <input_pin name="last_distance" />
+    <output_pin name="car_pos" />
+   </component>
+   <component height="338" name="KACADU_Monster_Filter" width="250" x="1800" y="159">
+    <input_pin name="car_pos" />
+    <input_pin name="video_input" />
+    <input_pin name="Jury_Struct" />
+    <input_pin name="Maneuver_List" />
+    <input_pin name="InUltraStruct" />
+    <input_pin name="depth_input" />
+    <output_pin name="video_output" />
+    <output_pin name="depth_output" />
+    <output_pin name="steering_angle" />
+    <output_pin name="speed" />
+    <output_pin name="debug_trajectory_point" />
+    <output_pin name="Driver_Struct" />
+    <output_pin name="headLightEnabled" />
+    <output_pin name="reverseLightEnabled" />
+    <output_pin name="brakeLightEnabled" />
+    <output_pin name="turnSignalRightEnabled" />
+    <output_pin name="turnSignalLeftEnabled" />
+    <output_pin name="hazardLightEnabled" />
+   </component>
+   <component height="194" name="AADC_Converter_IMU" width="174" x="1431" y="605">
+    <input_pin name="InerMeasUnit_Struct" />
+    <output_pin name="yaw" />
+    <output_pin name="pitch" />
+    <output_pin name="roll" />
+    <output_pin name="accX" />
+    <output_pin name="accY" />
+    <output_pin name="accZ" />
+   </component>
+   <component height="98" name="AADC_Xtion_Camera" width="172" x="957" y="170">
+    <output_pin name="Video_RGB" />
+    <output_pin name="Depth_Image" />
+   </component>
+   <component height="74" name="AADC_Watchdog_Trigger" width="172" x="50" y="100">
+    <output_pin name="WatchdogAliveSignal" />
+   </component>
+   <connection dest="AADC_Calibration_XML" dest_pin="input_value" reldiff="0" shape_type="3" source="KACADU_Wheel_Speed_Controller" source_pin="actuator_output" x_p2="2763" x_p3="2763" x_p4="2839" x_p5="2839" y_p2="0" y_p3="783" y_p4="783" y_p5="0" />
+   <connection dest="KACADU_Wheel_Speed_Controller" dest_pin="measured_wheelSpeed" reldiff="0" shape_type="4" source="KACADU_Converter_Wheels" source_pin="car_speed" x_p2="1210" x_p3="1210" x_p4="2477" x_p5="2477" y_p2="0" y_p3="435" y_p4="435" y_p5="0" />
+   <connection dest="KACADU_Wheel_Speed_Controller" dest_pin="set_WheelSpeed" reldiff="0" shape_type="4" source="KACADU_Emergency_Break" source_pin="OutControlSpeed" x_p2="2467" x_p3="2467" x_p4="2481" x_p5="2481" y_p2="0" y_p3="411" y_p4="411" y_p5="0" />
+   <connection dest="KACADU_World_Coord_Calculator" dest_pin="last_distance" reldiff="0" shape_type="3" source="KACADU_Converter_Wheels" source_pin="distance_lastSample" x_p2="1286" x_p3="1286" x_p4="1631" x_p5="1631" y_p2="0" y_p3="814" y_p4="814" y_p5="0" />
+   <connection dest="KACADU_Converter_Wheels" dest_pin="WheelLeft_Struct" reldiff="0" shape_type="3" source="Base_Config" source_pin="WheelLeft_Struct" x_p2="770" x_p3="770" x_p4="813" x_p5="813" y_p2="0" y_p3="813" y_p4="813" y_p5="0" />
+   <connection dest="KACADU_Converter_Wheels" dest_pin="WheelRight_Struct" reldiff="0" shape_type="3" source="Base_Config" source_pin="WheelRight_Struct" x_p2="774" x_p3="774" x_p4="813" x_p5="813" y_p2="0" y_p3="789" y_p4="789" y_p5="0" />
+   <connection dest="KACADU_Monster_Filter" dest_pin="depth_input" reldiff="0" shape_type="3" source="AADC_Xtion_Camera" source_pin="Depth_Image" x_p2="1145" x_p3="1145" x_p4="1768" x_p5="1768" y_p2="0" y_p3="441" y_p4="441" y_p5="0" />
+   <connection dest="Base_Config" dest_pin="hazzardLightsEnabled" reldiff="0" shape_type="1" source="KACADU_Monster_Filter" source_pin="hazardLightEnabled" x_p2="2262" x_p3="2262" x_p4="309" x_p5="309" y_p2="465" y_p3="487" y_p4="487" y_p5="642" />
+   <connection dest="Base_Config" dest_pin="turnSignalLeftEnabled" reldiff="0" shape_type="1" source="KACADU_Monster_Filter" source_pin="turnSignalLeftEnabled" x_p2="2258" x_p3="2258" x_p4="317" x_p5="317" y_p2="441" y_p3="434" y_p4="434" y_p5="560" />
+   <connection dest="Base_Config" dest_pin="turnSignalRightEnabled" reldiff="0" shape_type="1" source="KACADU_Monster_Filter" source_pin="turnSignalRightEnabled" x_p2="2254" x_p3="2254" x_p4="325" x_p5="325" y_p2="417" y_p3="381" y_p4="381" y_p5="478" />
+   <connection dest="Base_Config" dest_pin="brakeLightEnabled" reldiff="0" shape_type="2" source="KACADU_Monster_Filter" source_pin="brakeLightEnabled" x_p2="2250" x_p3="2250" x_p4="345" x_p5="345" y_p2="393" y_p3="267" y_p4="267" y_p5="273" />
+   <connection dest="Base_Config" dest_pin="reverseLightsEnabled" reldiff="0" shape_type="1" source="KACADU_Monster_Filter" source_pin="reverseLightEnabled" x_p2="2246" x_p3="2246" x_p4="321" x_p5="321" y_p2="369" y_p3="378" y_p4="378" y_p5="519" />
+   <connection dest="Base_Config" dest_pin="headLightEnabled" reldiff="0" shape_type="1" source="KACADU_Monster_Filter" source_pin="headLightEnabled" x_p2="2242" x_p3="2242" x_p4="337" x_p5="337" y_p2="345" y_p3="248" y_p4="248" y_p5="355" />
+   <connection dest="KACADU_Monster_Filter" dest_pin="InUltraStruct" reldiff="0" shape_type="4" source="Base_Config" source_pin="Ultrasonic_Struct" x_p2="782" x_p3="782" x_p4="1752" x_p5="1752" y_p2="0" y_p3="393" y_p4="393" y_p5="0" />
+   <connection dest="Base_Config" dest_pin="Driver_Struct" reldiff="0" shape_type="1" source="KACADU_Monster_Filter" source_pin="Driver_Struct" x_p2="2326" x_p3="2326" x_p4="313" x_p5="313" y_p2="321" y_p3="393" y_p4="393" y_p5="601" />
+   <connection dest="Base_Config" dest_pin="SpeedController" reldiff="0" shape_type="2" source="KACADU_Emergency_Break" source_pin="OutSpeed" x_p2="2502" x_p3="2502" x_p4="211" x_p5="211" y_p2="800" y_p3="639" y_p4="639" y_p5="314" />
+   <connection dest="KACADU_Emergency_Break" dest_pin="InSpeed" reldiff="0" shape_type="1" source="AADC_Calibration_XML" source_pin="output_value" x_p2="3037" x_p3="3037" x_p4="2077" x_p5="2077" y_p2="783" y_p3="848" y_p4="848" y_p5="812" />
+   <connection dest="KACADU_Emergency_Break" dest_pin="InSpeedControl" reldiff="0" shape_type="3" source="KACADU_Monster_Filter" source_pin="speed" x_p2="2075" x_p3="2075" x_p4="2075" x_p5="2075" y_p2="0" y_p3="788" y_p4="788" y_p5="0" />
+   <connection dest="KACADU_Emergency_Break" dest_pin="InUltraStruct" reldiff="0" shape_type="3" source="Base_Config" source_pin="Ultrasonic_Struct" x_p2="782" x_p3="782" x_p4="2079" x_p5="2079" y_p2="0" y_p3="764" y_p4="764" y_p5="0" />
+   <connection dest="Base_Config" dest_pin="SteeringController" reldiff="0" shape_type="1" source="KACADU_Monster_Filter" source_pin="steering_angle" x_p2="2336" x_p3="2336" x_p4="333" x_p5="333" y_p2="249" y_p3="255" y_p4="255" y_p5="396" />
+   <connection dest="KACADU_Monster_Filter" dest_pin="Maneuver_List" reldiff="0" shape_type="4" source="Base_Config" source_pin="Jury_ManeuverList" x_p2="786" x_p3="786" x_p4="1747" x_p5="1747" y_p2="0" y_p3="345" y_p4="345" y_p5="0" />
+   <connection dest="KACADU_Monster_Filter" dest_pin="Jury_Struct" reldiff="0" shape_type="3" source="Base_Config" source_pin="Jury_Struct" x_p2="714" x_p3="714" x_p4="1751" x_p5="1751" y_p2="0" y_p3="297" y_p4="297" y_p5="0" />
+   <connection dest="KACADU_Monster_Filter" dest_pin="video_input" reldiff="0" shape_type="3" source="AADC_Xtion_Camera" source_pin="Video_RGB" x_p2="1141" x_p3="1141" x_p4="1562" x_p5="1562" y_p2="0" y_p3="249" y_p4="249" y_p5="0" />
+   <connection dest="KACADU_Monster_Filter" dest_pin="car_pos" reldiff="0" shape_type="2" source="KACADU_World_Coord_Calculator" source_pin="car_pos" x_p2="1953" x_p3="1953" x_p4="1742" x_p5="1742" y_p2="790" y_p3="422" y_p4="422" y_p5="201" />
+   <connection dest="KACADU_World_Coord_Calculator" dest_pin="yaw" reldiff="0" shape_type="3" source="AADC_Converter_IMU" source_pin="yaw" x_p2="1617" x_p3="1617" x_p4="1702" x_p5="1702" y_p2="0" y_p3="790" y_p4="790" y_p5="0" />
+   <connection dest="AADC_Converter_IMU" dest_pin="InerMeasUnit_Struct" reldiff="0" shape_type="3" source="Base_Config" source_pin="InerMeasUnit_Struct" x_p2="766" x_p3="766" x_p4="962" x_p5="962" y_p2="0" y_p3="647" y_p4="647" y_p5="0" />
+   <connection dest="Base_Config" dest_pin="Watchdog_Alive_Flag" reldiff="0" shape_type="3" source="AADC_Watchdog_Trigger" source_pin="WatchdogAliveSignal" x_p2="234" x_p3="234" x_p4="328" x_p5="328" y_p2="0" y_p3="437" y_p4="437" y_p5="0" />
+  </configuration>
+  <configuration horizontal_scrollbar_value="1225" name="ObstacleTest" show="true" tab_pos="4" vertical_scrollbar_value="1" zoomfactor="0,833331">
+   <component height="506" name="Base_Config" width="345" x="357" y="231" />
+   <component height="98" name="Video_Display" width="172" x="2499" y="188">
+    <input_pin name="input" />
+    <input_pin name="gcl_input" />
+    <output_pin name="video_output" />
+   </component>
+   <component height="122" name="AADC_Converter_Wheels" width="256" x="1028" y="557">
+    <input_pin name="WheelRight_Struct" />
+    <input_pin name="WheelLeft_Struct" />
+    <output_pin name="car_speed" />
+    <output_pin name="distance_lastSample" />
+    <output_pin name="distance_overall" />
+   </component>
+   <component height="98" name="KACADU_Converter_Wheels" width="256" x="1019" y="834">
+    <input_pin name="WheelRight_Struct" />
+    <input_pin name="WheelLeft_Struct" />
+    <output_pin name="car_speed" />
+    <output_pin name="distance_lastSample" />
+   </component>
+   <component height="122" name="KACADU_Emergency_Break" width="216" x="2245" y="1160">
+    <input_pin name="InUltraStruct" />
+    <input_pin name="InSpeedControl" />
+    <input_pin name="InSpeed" />
+    <output_pin name="OutControlSpeed" />
+    <output_pin name="OutSpeed" />
+   </component>
+   <component height="74" name="AADC_Calibration_XML" width="172" x="2853" y="741">
+    <input_pin name="input_value" />
+    <output_pin name="output_value" />
+   </component>
+   <component height="98" name="AADC_Wheel_Speed_Controller" width="257" x="2506" y="529">
+    <input_pin name="set_WheelSpeed" />
+    <input_pin name="measured_wheelSpeed" />
+    <output_pin name="actuator_output" />
+   </component>
+   <component height="98" name="KACADU_World_Coord_Calculator" width="217" x="1724" y="748">
+    <input_pin name="yaw" />
+    <input_pin name="last_distance" />
+    <output_pin name="car_pos" />
+   </component>
+   <component height="338" name="KACADU_Monster_Filter" width="250" x="1800" y="159">
+    <input_pin name="car_pos" />
+    <input_pin name="video_input" />
+    <input_pin name="Jury_Struct" />
+    <input_pin name="Maneuver_List" />
+    <input_pin name="InUltraStruct" />
+    <input_pin name="depth_input" />
+    <output_pin name="video_output" />
+    <output_pin name="depth_output" />
+    <output_pin name="steering_angle" />
+    <output_pin name="speed" />
+    <output_pin name="debug_trajectory_point" />
+    <output_pin name="Driver_Struct" />
+    <output_pin name="headLightEnabled" />
+    <output_pin name="reverseLightEnabled" />
+    <output_pin name="brakeLightEnabled" />
+    <output_pin name="turnSignalRightEnabled" />
+    <output_pin name="turnSignalLeftEnabled" />
+    <output_pin name="hazardLightEnabled" />
+   </component>
+   <component height="194" name="AADC_Converter_IMU" width="174" x="1431" y="605">
+    <input_pin name="InerMeasUnit_Struct" />
+    <output_pin name="yaw" />
+    <output_pin name="pitch" />
+    <output_pin name="roll" />
+    <output_pin name="accX" />
+    <output_pin name="accY" />
+    <output_pin name="accZ" />
+   </component>
+   <component height="98" name="AADC_Xtion_Camera" width="172" x="957" y="170">
+    <output_pin name="Video_RGB" />
+    <output_pin name="Depth_Image" />
+   </component>
+   <component height="74" name="AADC_Watchdog_Trigger" width="172" x="50" y="100">
+    <output_pin name="WatchdogAliveSignal" />
+   </component>
+   <connection dest="Video_Display" dest_pin="input" reldiff="0" shape_type="3" source="KACADU_Monster_Filter" source_pin="video_output" x_p2="2140" x_p3="2140" x_p4="2487" x_p5="2487" y_p2="0" y_p3="230" y_p4="230" y_p5="0" />
+   <connection dest="AADC_Wheel_Speed_Controller" dest_pin="measured_wheelSpeed" reldiff="0" shape_type="4" source="AADC_Converter_Wheels" source_pin="car_speed" x_p2="1296" x_p3="1296" x_p4="2096" x_p5="2096" y_p2="0" y_p3="595" y_p4="595" y_p5="0" />
+   <connection dest="AADC_Converter_Wheels" dest_pin="WheelLeft_Struct" reldiff="0" shape_type="3" source="Base_Config" source_pin="WheelLeft_Struct" x_p2="770" x_p3="770" x_p4="857" x_p5="857" y_p2="0" y_p3="635" y_p4="635" y_p5="0" />
+   <connection dest="AADC_Converter_Wheels" dest_pin="WheelRight_Struct" reldiff="0" shape_type="4" source="Base_Config" source_pin="WheelRight_Struct" x_p2="774" x_p3="774" x_p4="853" x_p5="853" y_p2="0" y_p3="599" y_p4="599" y_p5="0" />
+   <connection dest="KACADU_World_Coord_Calculator" dest_pin="last_distance" reldiff="0" shape_type="4" source="KACADU_Converter_Wheels" source_pin="distance_lastSample" x_p2="1363" x_p3="1363" x_p4="1708" x_p5="1708" y_p2="0" y_p3="814" y_p4="814" y_p5="0" />
+   <connection dest="KACADU_Converter_Wheels" dest_pin="WheelLeft_Struct" reldiff="0" shape_type="3" source="Base_Config" source_pin="WheelLeft_Struct" x_p2="770" x_p3="770" x_p4="813" x_p5="813" y_p2="0" y_p3="900" y_p4="900" y_p5="0" />
+   <connection dest="KACADU_Converter_Wheels" dest_pin="WheelRight_Struct" reldiff="0" shape_type="3" source="Base_Config" source_pin="WheelRight_Struct" x_p2="774" x_p3="774" x_p4="813" x_p5="813" y_p2="0" y_p3="876" y_p4="876" y_p5="0" />
+   <connection dest="KACADU_Monster_Filter" dest_pin="depth_input" reldiff="0" shape_type="3" source="AADC_Xtion_Camera" source_pin="Depth_Image" x_p2="1145" x_p3="1145" x_p4="1768" x_p5="1768" y_p2="0" y_p3="441" y_p4="441" y_p5="0" />
+   <connection dest="Base_Config" dest_pin="hazzardLightsEnabled" reldiff="0" shape_type="1" source="KACADU_Monster_Filter" source_pin="hazardLightEnabled" x_p2="2340" x_p3="2340" x_p4="309" x_p5="309" y_p2="465" y_p3="487" y_p4="487" y_p5="642" />
+   <connection dest="Base_Config" dest_pin="turnSignalLeftEnabled" reldiff="0" shape_type="1" source="KACADU_Monster_Filter" source_pin="turnSignalLeftEnabled" x_p2="2336" x_p3="2336" x_p4="317" x_p5="317" y_p2="441" y_p3="434" y_p4="434" y_p5="560" />
+   <connection dest="Base_Config" dest_pin="turnSignalRightEnabled" reldiff="0" shape_type="1" source="KACADU_Monster_Filter" source_pin="turnSignalRightEnabled" x_p2="2332" x_p3="2332" x_p4="325" x_p5="325" y_p2="417" y_p3="381" y_p4="381" y_p5="478" />
+   <connection dest="Base_Config" dest_pin="brakeLightEnabled" reldiff="0" shape_type="2" source="KACADU_Monster_Filter" source_pin="brakeLightEnabled" x_p2="2328" x_p3="2328" x_p4="345" x_p5="345" y_p2="393" y_p3="267" y_p4="267" y_p5="273" />
+   <connection dest="Base_Config" dest_pin="reverseLightsEnabled" reldiff="0" shape_type="1" source="KACADU_Monster_Filter" source_pin="reverseLightEnabled" x_p2="2324" x_p3="2324" x_p4="321" x_p5="321" y_p2="369" y_p3="378" y_p4="378" y_p5="519" />
+   <connection dest="Base_Config" dest_pin="headLightEnabled" reldiff="0" shape_type="1" source="KACADU_Monster_Filter" source_pin="headLightEnabled" x_p2="2320" x_p3="2320" x_p4="337" x_p5="337" y_p2="345" y_p3="230" y_p4="230" y_p5="355" />
+   <connection dest="KACADU_Monster_Filter" dest_pin="InUltraStruct" reldiff="0" shape_type="4" source="Base_Config" source_pin="Ultrasonic_Struct" x_p2="782" x_p3="782" x_p4="1752" x_p5="1752" y_p2="0" y_p3="393" y_p4="393" y_p5="0" />
+   <connection dest="Base_Config" dest_pin="Driver_Struct" reldiff="0" shape_type="1" source="KACADU_Monster_Filter" source_pin="Driver_Struct" x_p2="2404" x_p3="2404" x_p4="313" x_p5="313" y_p2="321" y_p3="377" y_p4="377" y_p5="601" />
+   <connection dest="Base_Config" dest_pin="SpeedController" reldiff="0" shape_type="2" source="KACADU_Emergency_Break" source_pin="OutSpeed" x_p2="2508" x_p3="2508" x_p4="217" x_p5="217" y_p2="1238" y_p3="1077" y_p4="1077" y_p5="314" />
+   <connection dest="KACADU_Emergency_Break" dest_pin="InSpeed" reldiff="0" shape_type="1" source="AADC_Calibration_XML" source_pin="output_value" x_p2="3037" x_p3="3037" x_p4="2129" x_p5="2129" y_p2="783" y_p3="848" y_p4="848" y_p5="1250" />
+   <connection dest="AADC_Wheel_Speed_Controller" dest_pin="set_WheelSpeed" reldiff="0" shape_type="4" source="KACADU_Emergency_Break" source_pin="OutControlSpeed" x_p2="2473" x_p3="2473" x_p4="2480" x_p5="2480" y_p2="0" y_p3="571" y_p4="571" y_p5="0" />
+   <connection dest="KACADU_Emergency_Break" dest_pin="InSpeedControl" reldiff="0" shape_type="3" source="KACADU_Monster_Filter" source_pin="speed" x_p2="2153" x_p3="2153" x_p4="2229" x_p5="2229" y_p2="0" y_p3="1226" y_p4="1226" y_p5="0" />
+   <connection dest="KACADU_Emergency_Break" dest_pin="InUltraStruct" reldiff="0" shape_type="3" source="Base_Config" source_pin="Ultrasonic_Struct" x_p2="782" x_p3="782" x_p4="2079" x_p5="2079" y_p2="0" y_p3="1202" y_p4="1202" y_p5="0" />
+   <connection dest="AADC_Calibration_XML" dest_pin="input_value" reldiff="0" shape_type="3" source="AADC_Wheel_Speed_Controller" source_pin="actuator_output" x_p2="2828" x_p3="2828" x_p4="2841" x_p5="2841" y_p2="0" y_p3="783" y_p4="783" y_p5="0" />
+   <connection dest="Base_Config" dest_pin="SteeringController" reldiff="0" shape_type="1" source="KACADU_Monster_Filter" source_pin="steering_angle" x_p2="2414" x_p3="2414" x_p4="333" x_p5="333" y_p2="249" y_p3="255" y_p4="255" y_p5="396" />
+   <connection dest="KACADU_Monster_Filter" dest_pin="Maneuver_List" reldiff="0" shape_type="4" source="Base_Config" source_pin="Jury_ManeuverList" x_p2="786" x_p3="786" x_p4="1747" x_p5="1747" y_p2="0" y_p3="345" y_p4="345" y_p5="0" />
+   <connection dest="KACADU_Monster_Filter" dest_pin="Jury_Struct" reldiff="0" shape_type="3" source="Base_Config" source_pin="Jury_Struct" x_p2="714" x_p3="714" x_p4="1751" x_p5="1751" y_p2="0" y_p3="297" y_p4="297" y_p5="0" />
+   <connection dest="KACADU_Monster_Filter" dest_pin="video_input" reldiff="0" shape_type="3" source="AADC_Xtion_Camera" source_pin="Video_RGB" x_p2="1141" x_p3="1141" x_p4="1562" x_p5="1562" y_p2="0" y_p3="249" y_p4="249" y_p5="0" />
+   <connection dest="KACADU_Monster_Filter" dest_pin="car_pos" reldiff="0" shape_type="2" source="KACADU_World_Coord_Calculator" source_pin="car_pos" x_p2="1953" x_p3="1953" x_p4="1742" x_p5="1742" y_p2="790" y_p3="422" y_p4="422" y_p5="201" />
+   <connection dest="KACADU_World_Coord_Calculator" dest_pin="yaw" reldiff="0" shape_type="3" source="AADC_Converter_IMU" source_pin="yaw" x_p2="1617" x_p3="1617" x_p4="1702" x_p5="1702" y_p2="0" y_p3="790" y_p4="790" y_p5="0" />
+   <connection dest="AADC_Converter_IMU" dest_pin="InerMeasUnit_Struct" reldiff="0" shape_type="3" source="Base_Config" source_pin="InerMeasUnit_Struct" x_p2="766" x_p3="766" x_p4="962" x_p5="962" y_p2="0" y_p3="647" y_p4="647" y_p5="0" />
+   <connection dest="Base_Config" dest_pin="Watchdog_Alive_Flag" reldiff="0" shape_type="3" source="AADC_Watchdog_Trigger" source_pin="WatchdogAliveSignal" x_p2="234" x_p3="234" x_p4="328" x_p5="328" y_p2="0" y_p3="437" y_p4="437" y_p5="0" />
+  </configuration>
+ </ce_layouts>
+</adtf:configuration>
