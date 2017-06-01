@@ -4,7 +4,7 @@ This is the entry of team KACADU (Karlsruhe Cognitive Autonomous Driving Unit) f
 
 Team KACADU is the 2016 student team supported by the FZI Forschungszentrum Informatik. Besides this code basis a lot of additional material from other years as well as publications describing the code and supplementary simulation frameworks can be found on the official website:
 
-**Please visit [Audi Autonomous Driving Cup at www.fzi.de](https://www.fzi.de/aadc/)**
+**Please visit [Audi Autonomous Driving Cup at www.fzi.de](http://url.fzi.de/aadc)**
 
 
 License
@@ -52,4 +52,4 @@ Contact:
 -----------------------------------------------
 * kacadu@lists.kit.edu
 * kuhnt@fzi.de
-* [Audi Autonomous Driving Cup at FZI website](https://www.fzi.de/aadc/)
+* [Audi Autonomous Driving Cup at FZI website](http://url.fzi.de/aadc)
