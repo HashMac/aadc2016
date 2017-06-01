@@ -1,18 +1,17 @@
-Team KACADU
+AADC 2016 - Team KACADU
 ===============================================
-Karlsruhe Cognitive Autonomous Driving Unit
-Code Entry for AADC 2016.
+This is the entry of team KACADU (Karlsruhe Cognitive Autonomous Driving Unit) for the [Audi Autonomous Driving Cup](https://www.audi-autonomous-driving-cup.com/) 2016.
 
-This is our Entry for the [Audi Autonomous Driving Cup](https://www.audi-autonomous-driving-cup.com/) 2016.
-The code is Licensed under the BSD license (see License.txt).
-Copyright belongs to the the FZI ([Forschungszentrum Informatik](https://www.fzi.de/startseite/)) or Audi (the
-files are marked accordingly).
+Team KACADU is the 2016 student team supported by the FZI Forschungszentrum Informatik. Besides this code basis a lot of additional material from other years as well as publications describing the code and supplementary simulation frameworks can be found on the official website:
+
+**Please visit [Audi Autonomous Driving Cup at www.fzi.de](https://www.fzi.de/aadc/)**
 
 
 License
 -----------------------------------------------
-Almost everything is licensed under BSD. There are some parts integrated
-from oadrive that are licensed under CDDL. See there for more details.
+Almost everything is licensed under BSD (see file [LICENSE](LICENSE)). There are some parts integrated
+from oadrive that are licensed under CDDL. See there for more details. Copyright belongs partially to the FZI ([Forschungszentrum Informatik](https://www.fzi.de/startseite/)) or Audi (the
+files are marked accordingly).
 
 
 Structure:
@@ -51,5 +50,6 @@ If you have any questions, don't hesitate to contact us.
 
 Contact:
 -----------------------------------------------
-kacadu@lists.kit.edu
-kuhnt@fzi.de
+* kacadu@lists.kit.edu
+* kuhnt@fzi.de
+* [Audi Autonomous Driving Cup at FZI website](https://www.fzi.de/aadc/)
