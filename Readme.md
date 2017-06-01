@@ -6,6 +6,7 @@ Team KACADU is the 2016 student team supported by the FZI Forschungszentrum Info
 
 **Please visit [Audi Autonomous Driving Cup at www.fzi.de](http://url.fzi.de/aadc)**
 
+The most up to date version of the core functionality can be found in oadrive (https://github.com/fzi-forschungszentrum-informatik/oadrive), an easily integratable core library with a minimum of dependencies (no ADTF or ROS dependency).
 
 License
 -----------------------------------------------
@@ -20,7 +21,8 @@ Structure:
 oadrive:
 	This folder holds the data processing and logic of 
         our entry. It can be run from within ADTF, or separately
-	(for simulation and offline reconstruction).
+	(for simulation and offline reconstruction). Main project
+	here: https://github.com/fzi-forschungszentrum-informatik/oadrive
 
 aadcUser Folder:
 	This is the aadcUser folder as given to us by Audi,
